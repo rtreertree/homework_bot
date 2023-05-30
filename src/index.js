@@ -3,7 +3,6 @@ console.log("Starting . . .");
 //Import node module
 const fs = require("fs");
 const path = require("path");
-require("dotenv").config();
 
 //Import discord.js
 const { Client, Events, GatewayIntentBits, SlashCommandBuilder, Collection, REST, Routes} = require('discord.js');
