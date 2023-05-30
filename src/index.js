@@ -3,10 +3,12 @@ console.log("Starting . . .");
 //Import node module
 const fs = require("fs");
 const path = require("path");
+require("dotenv").config();
 
 //Import discord.js
 const { Client, Events, GatewayIntentBits, SlashCommandBuilder, Collection, REST, Routes} = require('discord.js');
-const { token, guild_id, app_id } = require('./config.json');
+const { guild_id, app_id } = require('./config.json');
+const token = process.env.TOKEN;
 
 //Define intents and client
 const client = new Client({

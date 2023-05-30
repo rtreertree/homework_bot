@@ -10,7 +10,7 @@ module.exports = {
                 .setRequired(true)
                 .addChoices(
                     { name: "math", value: "math" },
-                    { name: "pysics", value: "pysics" },
+                    { name: "physics", value: "pysics" },
                     { name: "thai", value: "thai"},
                 ))
         .addStringOption(option =>
@@ -39,6 +39,8 @@ module.exports = {
             const name_input = interaction.options.getString("name")
             const description_input = interaction.options.getString("description")
             const page_input = interaction.options.getString("page")
+            const assigned_input = interaction.options.getString("assigned")
+            const due_input = interaction.options.getString("due")
 
 
             const confirm_embed = new EmbedBuilder()
@@ -47,10 +49,11 @@ module.exports = {
                 .setDescription(`${description_input}`)
                 .addFields(
                     {name: "Page", value:`${page_input}`},
-                    {name: "Assigned", value: "<assigned date (00-00-0000)>", inline: true},
-                    {name: "Due", value: "<due date (00-00-0000)>", inline: true}
+                    {name: "Assigned", value: `${assigned_input}`, inline: true},
+                    {name: "Due", value: `${due_input}`, inline: true}
                 )
-                .setTimestamp();
+                .setTimestamp()
+                .setFooter({text: "Date created"});
 
             const comfirm_button = new ButtonBuilder()
                 .setCustomId("confirm_button")
@@ -75,6 +78,7 @@ module.exports = {
             try {
                 const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 60000 });
                 if (confirmation.customId === "confirm_button") {
+                    // await dosomething();
                     await confirm_embed.setColor("Green");
                     await confirmation.update({ content: "Confirmed", components: [], embeds: []});
                     await interaction.channel.send({
