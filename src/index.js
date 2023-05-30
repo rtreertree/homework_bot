@@ -84,4 +84,5 @@ client.on(Events.InteractionCreate, async interaction => {
 
 
 //Login with token
+console.log("Starting login");
 client.login(token);
