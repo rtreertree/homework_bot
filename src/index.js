@@ -7,8 +7,10 @@ require("dotenv").config();
 
 //Import discord.js
 const { Client, Events, GatewayIntentBits, SlashCommandBuilder, Collection, REST, Routes} = require('discord.js');
-const { guild_id, app_id } = require('./config.json');
+
 const token = process.env.TOKEN;
+const guild_id = process.env.GUILD_ID;
+const app_id = process.env.APP_ID;
 
 //Define intents and client
 const client = new Client({
@@ -63,6 +65,7 @@ const rest = new REST().setToken(token);
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 	const command = interaction.client.commands.get(interaction.commandName);
+
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
